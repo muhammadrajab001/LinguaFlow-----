@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinguaFlow - Онлайн-школа иностранных языков</title>
+    <title>GreenBasket - Эко продукты с доставкой</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,278 +13,184 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <i class="fas fa-comments logo-icon"></i>
-                    <div class="logo-text">Lingua<span>Flow</span></div>
+                    <i class="fas fa-leaf logo-icon"></i>
+                    <div class="logo-text">Green<span>Basket</span></div>
                 </a>
                 <nav>
                     <ul>
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#languages">Языки</a></li>
-                        <li><a href="#features">Преимущества</a></li>
-                        <li><a href="#dashboard">Кабинет</a></li>
-                        <li><a href="#testimonials">Отзывы</a></li>
+                        <li><a href="#products">Продукты</a></li>
+                        <li><a href="#subscription">Подписка</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#delivery">Доставка</a></li>
                     </ul>
                 </nav>
-                <div class="auth-buttons">
-                    <button class="btn btn-outline">Вход</button>
-                    <button class="btn btn-primary">Начать обучение</button>
+                <div class="header-actions">
+                    <div class="cart-icon" id="cart-icon">
+                        <i class="fas fa-shopping-basket" style="font-size: 24px; color: var(--primary-green);"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </div>
+                    <div class="user-info" id="user-info">
+                        <div class="user-avatar" id="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span id="user-name">Войти</span>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
-    <section class="hero" id="home">
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Вход и регистрация</h3>
+                <button class="close-modal" id="close-auth-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-tabs">
+                    <button class="tab-btn active" data-tab="login">Вход</button>
+                    <button class="tab-btn" data-tab="register">Регистрация</button>
+                </div>
+                
+                <div class="success-message" id="success-message">
+                    <i class="fas fa-check-circle"></i> Регистрация прошла успешно! Теперь вы можете войти в систему.
+                </div>
+                <div id="login-tab" class="tab-content active">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label class="form-label" for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-input" placeholder="Ваш email" required>
+                            <div class="error-message" id="login-email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="login-password">Пароль</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="login-password" class="form-input" placeholder="Ваш пароль" required>
+                                <button type="button" class="toggle-password" data-target="login-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="login-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                        </div>
+                        
+                        <div class="form-footer">
+                            <p>Нет аккаунта? <a class="form-link" id="switch-to-register">Зарегистрироваться</a></p>
+                        </div>
+                    </form>
+                </div>
+                <div id="register-tab" class="tab-content">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label class="form-label" for="register-name">Имя</label>
+                            <input type="text" id="register-name" class="form-input" placeholder="Ваше имя" required>
+                            <div class="error-message" id="register-name-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="register-email">Email</label>
+                            <input type="email" id="register-email" class="form-input" placeholder="Ваш email" required>
+                            <div class="error-message" id="register-email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="register-phone">Телефон</label>
+                            <input type="tel" id="register-phone" class="form-input" placeholder="+7 (999) 999-99-99" required>
+                            <div class="error-message" id="register-phone-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="register-address">Адрес доставки</label>
+                            <input type="text" id="register-address" class="form-input" placeholder="Город, улица, дом, квартира" required>
+                            <div class="error-message" id="register-address-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="register-password">Пароль</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="register-password" class="form-input" placeholder="Придумайте пароль" required>
+                                <button type="button" class="toggle-password" data-target="register-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="register-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="register-confirm-password">Подтвердите пароль</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="register-confirm-password" class="form-input" placeholder="Повторите пароль" required>
+                                <button type="button" class="toggle-password" data-target="register-confirm-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="register-confirm-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+                        </div>
+                        
+                        <div class="form-footer">
+                            <p>Уже есть аккаунт? <a class="form-link" id="switch-to-login">Войти</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <button id="close-cart" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+        </div>
+        <div class="cart-total">
+            <span>Итого:</span>
+            <span id="cart-total">0 ₽</span>
+        </div>
+        <button class="btn btn-primary" style="width: 100%;" id="checkout-btn">Оформить заказ</button>
+    </div>
+    <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Изучайте языки с удовольствием</h1>
-                    <p>Интерактивная платформа для изучения иностранных языков с персональным подходом, живыми уроками с носителями и игровыми упражнениями.</p>
-                    <button class="btn btn-primary" style="padding: 15px 35px; font-size: 1.1rem;">
-                        <i class="fas fa-play-circle"></i> Попробовать бесплатно
-                    </button>
+                    <h1>Свежие эко-продукты с доставкой</h1>
+                    <p>Ежедневная доставка органических овощей, фруктов и фермерских продуктов прямо к вашей двери. Подпишитесь на регулярные поставки и получайте свежие продукты без забот.</p>
+                    <button class="btn btn-primary" id="start-subscription">Начать подписку</button>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Обучение языкам">
+                    <div style="width: 100%; height: 400px; background-color: var(--light-green); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--primary-green); font-size: 80px;">
+                        <i class="fas fa-seedling"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="features" id="features">
+    <section class="products" id="products">
         <div class="container">
             <div class="section-title">
-                <h2>Почему выбирают LinguaFlow</h2>
-                <p>Современный подход к изучению языков, сочетающий технологии и живое общение</p>
+                <h2>Наши продукты</h2>
+                <p>Вся наша продукция проходит строгий контроль качества и имеет сертификаты органического происхождения</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-user-friends"></i>
-                    </div>
-                    <h3>Живые уроки</h3>
-                    <p>Индивидуальные и групповые занятия с преподавателями-носителями языка в удобное время</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3>Игровое обучение</h3>
-                    <p>Интерактивные упражнения, квизы и игры делают процесс обучения увлекательным и эффективным</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Отслеживание прогресса</h3>
-                    <p>Детальная статистика и персональные рекомендации для достижения лучших результатов</p>
-                </div>
+            
+            <div class="category-filter" id="category-filter">
+                <button class="category-btn active" data-category="all">Все продукты</button>
+                <button class="category-btn" data-category="vegetables">Овощи</button>
+                <button class="category-btn" data-category="fruits">Фрукты</button>
+                <button class="category-btn" data-category="dairy">Молочные продукты</button>
+                <button class="category-btn" data-category="bakery">Выпечка</button>
+            </div>
+            
+            <div class="products-grid" id="products-grid">
             </div>
         </div>
     </section>
-    <section class="languages" id="languages">
-        <div class="container">
-            <div class="section-title">
-                <h2>Изучайте более 10 языков</h2>
-                <p>Выбирайте из широкого спектра языков и специализированных курсов</p>
-            </div>
-            <div class="languages-grid">
-                <div class="language-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3>Английский</h3>
-                    <p>Все уровни, бизнес-английский, подготовка к экзаменам</p>
-                </div>
-                <div class="language-card">
-                    <i class="fas fa-globe-europe"></i>
-                    <h3>Испанский</h3>
-                    <p>Разговорный испанский, латиноамериканский вариант</p>
-                </div>
-                <div class="language-card">
-                    <i class="fas fa-globe-asia"></i>
-                    <h3>Китайский</h3>
-                    <p>Мандаринский диалект, иероглифика, бизнес-курс</p>
-                </div>
-                <div class="language-card">
-                    <i class="fas fa-globe-europe"></i>
-                    <h3>Немецкий</h3>
-                    <p>Общий курс, технический немецкий, подготовка к TestDaF</p>
-                </div>
-                <div class="language-card">
-                    <i class="fas fa-globe-asia"></i>
-                    <h3>Японский</h3>
-                    <p>Иероглифика кандзи, разговорная практика, деловой японский</p>
-                </div>
-                <div class="language-card">
-                    <i class="fas fa-globe-europe"></i>
-                    <h3>Французский</h3>
-                    <p>Классический французский, деловой курс, подготовка к DELF/DALF</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="dashboard-preview" id="dashboard">
-        <div class="container">
-            <div class="section-title">
-                <h2>Персональный кабинет</h2>
-                <p>Удобная панель управления вашим обучением с отслеживанием прогресса</p>
-            </div>
-            <div class="dashboard-container">
-                <div class="dashboard-header">
-                    <div class="dashboard-title">
-                        <h3>Мой прогресс обучения</h3>
-                        <p>Английский язык, средний уровень</p>
-                    </div>
-                    <div class="dashboard-stats">
-                        <div class="stat-item">
-                            <span class="stat-value" id="lessons-count">0</span>
-                            <span class="stat-label">Уроков пройдено</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value" id="streak-count">0</span>
-                            <span class="stat-label">Дней подряд</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-value" id="level-percent">0%</span>
-                            <span class="stat-label">Завершено</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-item">
-                        <div class="progress-header">
-                            <span>Грамматика</span>
-                            <span id="grammar-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="grammar-progress"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-header">
-                            <span>Лексика</span>
-                            <span id="vocabulary-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="vocabulary-progress"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-header">
-                            <span>Разговорная практика</span>
-                            <span id="speaking-percent">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="speaking-progress"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Отзывы наших студентов</h2>
-                <p>Тысячи студентов уже достигли своих целей с помощью LinguaFlow</p>
-            </div>
-            <div class="testimonials-slider">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "За 6 месяцев занятий на платформе смогла подготовиться к собеседованию в международную компанию. Особенно полезными были разговорные клубы с носителями языка!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h4>Анна Смирнова</h4>
-                            <p>Студентка, английский язык</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "Как бизнесмену, мне было важно подтянуть деловой английский для переговоров. Индивидуальные занятия с преподавателем и тематические модули дали отличный результат."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div>
-                            <h4>Дмитрий Ковалев</h4>
-                            <p>Предприниматель, бизнес-английский</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        "Готовилась к экзамену HSK по китайскому. Структурированные уроки, практика иероглифов и регулярные проверочные тесты помогли сдать на высокий балл!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <div>
-                            <h4>Мария Петрова</h4>
-                            <p>Студентка, китайский язык</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="cta-section">
-        <div class="container">
-            <h2>Начните бесплатно сегодня</h2>
-            <p>Получите 7-дневный доступ ко всем функциям платформы и первый урок с преподавателем бесплатно</p>
-            <button class="btn btn-light">Начать обучение бесплатно</button>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>LinguaFlow</h3>
-                    <p>Современная платформа для изучения иностранных языков с интерактивными уроками, персональным подходом и отслеживанием прогресса.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Языки</h3>
-                    <ul>
-                        <li><a href="#">Английский</a></li>
-                        <li><a href="#">Испанский</a></li>
-                        <li><a href="#">Китайский</a></li>
-                        <li><a href="#">Немецкий</a></li>
-                        <li><a href="#">Французский</a></li>
-                        <li><a href="#">Японский</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>О компании</h3>
-                    <ul>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Преподаватели</a></li>
-                        <li><a href="#">Вакансии</a></li>
-                        <li><a href="#">Блог</a></li>
-                        <li><a href="#">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> +7 (800) 123-45-67</li>
-                        <li><i class="fas fa-envelope"></i> hello@linguaflow.ru</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Образцова, д. 25</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 LinguaFlow. Все права защищены. <a href="#" style="color: var(--accent-teal);">Политика конфиденциальности</a></p>
-            </div>
-        </div>
-    </footer>
-<script src="script.js"></script>
+
+   
 </body>
 </html>
